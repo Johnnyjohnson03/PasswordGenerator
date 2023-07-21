@@ -1,5 +1,5 @@
 // Assignment Code
- var generateBtn = document.querySelector("#generate");
+var generateBtn = document.querySelector("#generate");
 // document.querySelector("#generate");
 
 // Write password to the #password input
@@ -10,7 +10,7 @@ function writePassword() {
 
   // value of that text area equal to the value of the pw variable
   passwordText.value = password;
-  
+
 
 
 }
@@ -41,29 +41,35 @@ function generatePassword() {
   // validate the input, if they choose yes, include at least one special character
 
   // build the password
-var password=document.getElementById("password");
 
-  function genPassword() {
-    var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    var passwordLength = 8;
-    var passwordLowercase = confirm;
-    var passwordUppercase = confirm;
-    var passwordNumeric = confirm;
-    var passwordSpecialcharacters = confirm;
-    var password = "";
-    for (var i = 0; i <= passwordLength; i++) {
-      var randomNumber = Math.floor(Math.random() * chars.length);
-      password += chars.substring(randomNumber, randomNumber +1);  
+  var lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
+  var uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var numeric = "0123456789";
+  var specialCharacters = "!@#$%^&*()-_=+[]{}|;:,.<>?";
+
+  // combine character sets based on the criteria
+  let combineChars = "";
+  if (passwordUppercase) combineChars += uppercaseLetters;
+  if (passwordLowercase) combineChars += lowercaseLetters;
+  if (passwordNumeric) combineChars += numeric;
+  if (passwordSpecialcharacter) combineChars += specialCharacters;
+
+  // Check if at least one character set is selected
+  if (combineChars.length === 0) {
+    throw new Error("You need to select at least one character set.");
   }
-        document.getElementById("password").value = password;
-  // return password
+
+  // Generate password
+  let password = "";
+  for (let i = 0; i < passwordLength; i++) {
+    var randomIndex = Math.floor(Math.random() * combineChars.length);
+    password += combineChars[randomIndex];
   }
-   
-  function copyPassword() {
-    var copyText = document.getElementById("password");
-    copyText.select();
-    document.execCommand("copy")
-  }
+  console.log(password)
+  return password;
+}
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword)}
+
+generateBtn.addEventListener("click", writePassword)
+console.log(password)
